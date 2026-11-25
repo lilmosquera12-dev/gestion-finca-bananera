@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = window.location.origin;
 
 async function cargarRoles() {
     const selectRol = document.getElementById('rolSelect');
@@ -154,4 +154,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('loginForm')?.addEventListener('submit', manejarLogin);
     document.getElementById('rolForm')?.addEventListener('submit', manejarCrearRol);
     document.getElementById('trabajadorForm')?.addEventListener('submit', manejarRegistroTrabajador);
-});sebastian
+});
