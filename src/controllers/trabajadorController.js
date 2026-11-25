@@ -16,9 +16,11 @@ const registrarTrabajador = async (req, res) => {
             });
         }
 
+        const nombreCompleto = `${documento} - ${nombre} ${apellido}`.trim();
+
         await pool.query(
-            'INSERT INTO trabajadores (documento, nombres, apellidos, telefono, fecha, fk_rol) VALUES (?, ?, ?, ?, ?, ?)',
-            [documento, nombre, apellido, telefono, fecha, fk_rol]
+            'INSERT INTO trabajadores (nombre, id_rol) VALUES (?, ?)',
+            [nombreCompleto, fk_rol]
         );
 
         res.json({ success: true, message: 'Trabajador registrado con éxito' });
@@ -27,13 +29,6 @@ const registrarTrabajador = async (req, res) => {
         console.error('Código:', error.code);
         console.error('Mensaje:', error.sqlMessage);
         console.error('SQL:', error.sql);
-
-        if (error.code === 'ER_DUP_ENTRY') {
-            return res.status(409).json({
-                success: false,
-                message: 'Ese número de documento ya está registrado'
-            });
-        }
 
         res.status(500).json({
             success: false,
@@ -54,12 +49,12 @@ const loginTrabajador = async (req, res) => {
         }
 
         const query = `
-            SELECT t.nombres AS nombre, r.nombre_rol
+            SELECT t.nombre AS nombre, r.nombre_rol
             FROM trabajadores t
-            JOIN roles r ON t.fk_rol = r.id_rol
-            WHERE t.documento = ?
+            JOIN roles r ON t.id_rol = r.id_rol
+            WHERE t.nombre LIKE ?
         `;
-        const [rows] = await pool.query(query, [documento]);
+        const [rows] = await pool.query(query, [`${documento}%`]);
 
         if (rows.length > 0) {
             res.json({
