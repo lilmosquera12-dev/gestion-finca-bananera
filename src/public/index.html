@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroControl · Gestión de Personal y Roles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-content">
+            <div class="brand">
+                <div class="brand-icon">🌱</div>
+                <div>
+                    <div class="brand-row">
+                        <h1>AgroControl</h1>
+                        <span class="version-pill">FINCA OS</span>
+                    </div>
+                    <p>Sistema Inteligente de Trabajadores, Cargos y Acceso</p>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="kpi-chip">
+                    <span class="kpi-label">Roles Activos</span>
+                    <span class="kpi-value" id="statRoles">0</span>
+                </div>
+                <div class="badge-status">
+                    <span class="pulse-dot"></span>
+                    Sistema Activo
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <section class="col-side">
+            <article class="card card-accent-green">
+                <div class="card-header">
+                    <div class="icon-box green">🔑</div>
+                    <div>
+                        <h2>Ingreso de Personal</h2>
+                        <p class="subtitle">Verifica tu cargo y acceso al instante</p>
+                    </div>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="docLogin">Número de Documento</label>
+                        <input type="text" id="docLogin" placeholder="Ej. 1027964521" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Entrar al Sistema</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </form>
+                <div id="resultadoLogin" class="status-banner" aria-live="polite"></div>
+            </article>
+
+            <article class="card card-accent-amber">
+                <div class="card-header">
+                    <div class="icon-box amber">🏷️</div>
+                    <div>
+                        <h3>Configuración de Roles</h3>
+                        <p class="subtitle">Crea nuevos cargos operativos para la finca</p>
+                    </div>
+                </div>
+                <form id="rolForm">
+                    <div class="form-group">
+                        <label for="nombreRol">Nombre del Rol / Cargo</label>
+                        <input type="text" id="nombreRol" placeholder="Ej. Mayordomo, Capataz, Operario..." required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">
+                        <span>+ Guardar Rol</span>
+                    </button>
+                </form>
+                <div id="resultadoRol" class="status-banner" aria-live="polite"></div>
+            </article>
+        </section>
+
+        <section class="card card-main card-accent-blue">
+            <div class="card-header">
+                <div class="icon-box blue">👷</div>
+                <div>
+                    <h2>Registro de Trabajadores</h2>
+                    <p class="subtitle">Completa los datos para dar de alta a un colaborador</p>
+                </div>
+            </div>
+            <form id="trabajadorForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="documento">Documento de Identidad</label>
+                        <input type="text" id="documento" placeholder="Número de cédula" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono de Contacto</label>
+                        <input type="text" id="telefono" placeholder="Ej. 300 123 4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" id="nombres" placeholder="Nombres del trabajador" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" placeholder="Apellidos del trabajador" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rolSelect">Cargo / Rol Asignado</label>
+                        <select id="rolSelect" required>
+                            <option value="">Selecciona el Rol...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha de Ingreso</label>
+                        <input type="date" id="fecha" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">
+                    <span>Registrar Trabajador</span>
+                    <span class="btn-arrow">✦</span>
+                </button>
+                <p id="mensaje" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
